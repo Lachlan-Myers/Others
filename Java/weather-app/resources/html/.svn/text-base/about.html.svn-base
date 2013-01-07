@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title></title>
+		<style type="text/css">
+		body
+		{
+			font-family: sans-serif;
+		}
+		</style>
+	</head>
+	<body>
+		<p style="text-align: center">
+			<span style="font-size: 2.5em">Weather</span>
+			<br />
+			<span style="font-size: 0.7em; padding-left: 10px">Team Friday</span>
+			<br /><br /><br />
+			<img src="images/weathericons/36.png" width="32" height="32" /><br /><br />
+			<span style="font-size: 0.7em">Copyright (c) 2010 Team Friday</span>
+		</p>
+	</body>
+</html>

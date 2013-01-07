@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title></title>
+		<style type="text/css">
+			body
+			{
+				font-family: sans-serif;
+			}
+		</style>
+	</head>
+	<body>
+		<p style="width: 100%">
+			<span id="weatherapp_dynamic_stationname" style="font-size: 1.5em">${weatherapp:stationname}</span>
+			<hr style="color: #c00000" size="1" />
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tr>
+					<td><span id="weatherapp_dynamic_timespan" style="font-weight: bold; font-size: 0.7em; color: #444444">${weatherapp:timespan}</span></td>
+					<td style="text-align: right"><span id="weatherapp_dynamic_date" style="font-size: 0.7em; color: #444444">${weatherapp:date}</span></td>
+				</tr>
+			</table>
+		</p>
+		<p id="weatherapp_special_errormsg" style="width: 100%; text-align: center; color: #c00000">
+		</p>
+		<p><br /></p>
+		
+		<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tr>
+				<td style="width: 40%; text-align: center; border-right: #eeeeee 1px solid">
+					<img src="images/weathericons/50.png" id="weatherapp_special_icon" /><br />
+					<span id="weatherapp_dynamic_description" style="font-size: 0.9em">${weatherapp:description}</span><br /><br />
+					<span id="weatherapp_dynamic_maxtemp" style="font-weight: bold; color: #c10015">${weatherapp:maxtemp}</span>&deg;
+					<span id="weatherapp_dynamic_mintemp" style="font-weight: bold; color: #0168ab; padding-left: 10px">${weatherapp:mintemp}</span>&deg;<br />
+				</td>
+				<td style="width: 60%; padding-left: 20px; vertical-align: top; font-size: 0.8em; color: #555555">
+					<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						<tr>
+							<td style="width: 100px">Rain</td><td><span id="weatherapp_dynamic_rain">${weatherapp:rain}</span> mm</td>
+						</tr>
+						<tr>
+							<td>Evaporation</td><td><span id="weatherapp_dynamic_evaporation">${weatherapp:evaporation}</span> mm</td>
+						</tr>
+						<tr>
+							<td>Sun</td><td><span id="weatherapp_dynamic_sun">${weatherapp:sun}</span> hrs</td>
+						</tr>
+						<tr><td colspan="2">&nbsp;</td></tr>
+						<tr>
+							<td>Gust direction</td><td><span id="weatherapp_dynamic_gustdirection">${weatherapp:gustdirection}</span></td>
+						</tr>
+						<tr>
+							<td>Gust speed</td><td><span id="weatherapp_dynamic_gustspeed">${weatherapp:gustspeed}</span> km/h</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		
+		<p><br /><br /><br /><br /><br /><br /></p>
+		
+		<p style="width: 100%">
+			<hr style="color: #c00000" size="1" />
+		</p>
+		
+			<table cellpadding="5" cellspacing="0" border="0" style="width: 100%; font-size: 0.8em; color: #555555; text-align: center">
+				<tr>
+					<td style="border-right: #eeeeee 1px solid; font-size: 1.1em">
+						&nbsp;
+					</td>
+					<td style="text-align: center; border-right: #eeeeee 1px solid; font-size: 1.1em">
+						9am
+					</td>
+					<td style="text-align: center; font-size: 1.1em">
+						3pm
+					</td>
+				</tr>
+				<tr>
+					<td style="border-right: #eeeeee 1px solid; text-align: left">Temperature</td>
+					<td style="border-right: #eeeeee 1px solid"><span id="weatherapp_dynamic_amtemperature">${weatherapp:amtemperature}</span> &deg;</td>
+					<td><span id="weatherapp_dynamic_pmtemperature">${weatherapp:pmtemperature}</span> &deg;</td>
+				</tr>
+				<tr>
+					<td style="border-right: #eeeeee 1px solid; text-align: left">Relative humidity</td>
+					<td style="border-right: #eeeeee 1px solid"><span id="weatherapp_dynamic_amhumidity">${weatherapp:amhumidity}</span> %</td>
+					<td><span id="weatherapp_dynamic_pmhumidity">${weatherapp:pmhumidity}</span> %</td>
+				</tr>
+				<tr>
+					<td style="border-right: #eeeeee 1px solid; text-align: left">Cloud</td>
+					<td style="border-right: #eeeeee 1px solid"><span id="weatherapp_dynamic_amcloud">${weatherapp:amcloud}</span> 8<sup>th</sup></td>
+					<td><span id="weatherapp_dynamic_pmcloud">${weatherapp:pmcloud}</span> 8<sup>th</sup></td>
+				</tr>
+				<tr>
+					<td style="border-right: #eeeeee 1px solid; text-align: left">Mean sea level pressure</td>
+					<td style="border-right: #eeeeee 1px solid"><span id="weatherapp_dynamic_amsealevelpressure">${weatherapp:amsealevelpressure}</span> hPa</td>
+					<td><span id="weatherapp_dynamic_pmsealevelpressure">${weatherapp:pmsealevelpressure}</span> hPa</td>
+				</tr>
+				<tr>
+					<td style="border-right: #eeeeee 1px solid; text-align: left">&nbsp;</td>
+					<td style="border-right: #eeeeee 1px solid">&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td style="border-right: #eeeeee 1px solid; text-align: left">Wind direction</td>
+					<td style="border-right: #eeeeee 1px solid"><span id="weatherapp_dynamic_amwinddirection">${weatherapp:amwinddirection}</span></td>
+					<td><span id="weatherapp_dynamic_pmwinddirection">${weatherapp:pmwinddirection}</span></td>
+				</tr>
+				<tr>
+					<td style="border-right: #eeeeee 1px solid; text-align: left">Wind speed</td>
+					<td style="border-right: #eeeeee 1px solid"><span id="weatherapp_dynamic_amwindspeed">${weatherapp:amwindspeed}</span></td>
+					<td><span id="weatherapp_dynamic_pmwindspeed">${weatherapp:pmwindspeed}</span></td>
+				</tr>
+			</table>
+	</body>
+</html>

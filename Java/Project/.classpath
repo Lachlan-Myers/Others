@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry path="" kind="src"/>
+	<classpathentry path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true" kind="con"/>
+	<classpathentry path="C:/Documents and Settings/Cam/My Documents/UNI 2011/Sadi/JDBC/ojdbc14.jar" exported="true" kind="lib"/>
+	<classpathentry path="C:/Documents and Settings/Cam/My Documents/UNI 2011/Sadi/JDBC/postgresql-9.1-902.jdbc4.jar" kind="lib"/>
+	<classpathentry path="" kind="output"/>
+</classpath>
