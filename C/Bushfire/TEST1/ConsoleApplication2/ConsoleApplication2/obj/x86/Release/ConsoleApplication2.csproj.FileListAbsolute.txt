@@ -1,0 +1,5 @@
+G:\New Folder (2)\TEST1\ConsoleApplication2\ConsoleApplication2\bin\Release\ConsoleApplication2.exe
+G:\New Folder (2)\TEST1\ConsoleApplication2\ConsoleApplication2\bin\Release\ConsoleApplication2.pdb
+G:\New Folder (2)\TEST1\ConsoleApplication2\ConsoleApplication2\obj\x86\Release\ResolveAssemblyReference.cache
+G:\New Folder (2)\TEST1\ConsoleApplication2\ConsoleApplication2\obj\x86\Release\ConsoleApplication2.exe
+G:\New Folder (2)\TEST1\ConsoleApplication2\ConsoleApplication2\obj\x86\Release\ConsoleApplication2.pdb

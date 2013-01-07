@@ -1,0 +1,31 @@
+	System.out.println("Enter a direction on the grid(N,S,E,W): ");
+				temp = stdin.readLine();
+				dir = temp;
+			}			
+			while(hr > field || hc>field||hr > field && hc>field);
+		//	player1[hr][hc] = "S";
+			
+			if(dir == "N")
+			{
+				player1[hr][hc] = "S";
+				player1[hr+1][hc] = "S";
+				player1[hr+2][hc] = "S";
+			}
+			if(dir == "S")
+			{
+				player1[hr][hc] = "S";
+				player1[hr+1][hc] = "S";
+				player1[hr+2][hc] = "S";
+			}
+			if(dir == "E")
+			{
+				player1[hr][hc] = "S";
+				player1[hr][hc+1] = "S";
+				player1[hr][hc+2] = "S";
+			}
+			if(dir == "W")
+			{
+				player1[hr][hc] = "S";
+				player1[hr][hc-1] = "S";
+				player1[hr][hc-2] = "S";
+			}

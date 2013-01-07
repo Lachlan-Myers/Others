@@ -1,0 +1,46 @@
+import java.sql.*;
+class SimpleQuery
+{
+  public static void main (String args [])
+  { 
+    if( args.length != 2 ) {
+      System.out.println("USAGE: java SimpleQuery username password");
+      System.exit(0);
+    }
+    try {
+      // Load the Oracle JDBC driver
+      Class.forName("oracle.jdbc.driver.OracleDriver");
+      String url = "jdbc:oracle:thin:@emu.cs.rmit.edu.au:1521:GENERAL";
+      Connection connection = DriverManager.getConnection(url, args[0], args[1]);
+      Statement statement = connection.createStatement();
+
+      String query = "create table test (student_no number primary key, " +
+        "student_name char(100))";
+      statement.executeUpdate(query);
+
+      query = "insert into test values('1234567', 'Bob Mitchell')";
+      statement.executeUpdate(query);
+
+      query = "insert into test values('7654321', 'Peter Smith')";
+      statement.executeUpdate(query);
+
+      query = "SELECT student_no, student_name from test";
+      System.out.println("STUDENT NUMBERS and NAMES");
+      ResultSet rs = statement.executeQuery(query);
+      while (rs.next())
+        System.out.println(rs.getString(1) + " " + rs.getString(2));
+
+      query = "drop table test";
+      statement.executeUpdate(query);
+
+      connection.close();
+    }
+    catch( Exception ex ) {
+      System.out.println("Error connecting to database");
+      ex.printStackTrace();
+      System.exit(1);
+    }
+  }
+}
+/*This small java file connects to your oracle account, creates a table, inserts some values and runs a query.
+To execute this sample program, you need import the external jar(Ojdbc14.jar)*/

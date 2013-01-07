@@ -1,0 +1,98 @@
+Intro to Oracle and SQL revision – Prepared by Pablo Rossi
+1. Connecting to ORACLE
+
+An Oracle account should have been created for you. If this is not the case, please go to the help desk with your COE. You should have access to the 3 databases: GENERAL, DISTRIB1, and DISTRIB2. This database is running on the server emu.
+2. Starting SQL*plus.
+
+To invoke SQL type (at the Unix prompt)
+
+sqlplus
+
+By default you will be connected to GENERAL.You will be prompted for your ORACLE username and password as mailed to you by the ORACLE DBA. You should now be in the ORACLE SQL environment. You should change your password on this account. To do this, enter the command:
+
+password
+
+SQL*plus can also be executed from Windows: Simply go to Programs => Oracle => Application Development => SQL Plus. You will be prompted for your ORACLE username, password and DB name.
+
+Once you are connected to (Oracle) SQL*Plus you can change the current DB with the following command:
+
+connect USER_NAME @ DB_NAME (for example: connect pablo@distrib1)
+
+SQL*Plus can be used from a web interface as well:
+
+http://emu.cs.rmit.edu.au/isqlplus
+
+3. Executing SQL commands.
+
+Within SQL*plus you can interactively execute simple SQL statements. For example, to query the name of all our tables, type:
+
+select * from tab;
+
+For longer or more complex SQL statements you can put SQL statements in a batch file (with the extension .sql) using any text editor and execute your batch files by starting them. For example, to create a batch file to create the table employee (p108 of "Principles of distributed database systems", Ozsu & Valduriez) create a file with the following SQL statements:
+
+ create table employee   (ENO char(3) primary key,   ENAME char(18),   TITLE char(12)); 
+
+Save it as 'cremptab.sql' and then run the batch file by typing:
+
+@cremptab [or start cremptab]
+
+To verify that the table has been created, type:
+
+describe employee;
+
+An easy way to change the data or the structure of the table employee is to drop (delete) the table you have created and to rerun your (amended) batch file. To drop a table type:
+
+drop table employee [cascade constraints];
+
+4. Adding data to the database.
+
+To load the employee table with data, create a batch file (say loademptab.sql) using data from the example database instance as follows:
+
+ insert into employee (ENO, ENAME,TITLE) values   ('E1', 'J.Doe', 'Elect.Eng.'); insert into employee values   ('E2', 'M.Smith', 'Syst.Anal.'); 
+
+To observe the data in your table simply type:
+
+select * from employee;
+
+If you make an error creating data, an easy way to recover this is to delete all rows of the table and to re-run the (amended) batch file. Eg
+
+ delete from employee; @loademptab 
+
+5. Setting up the entire database
+
+A batch file, sample_db.sql, can be used to set up the example database. To set up your own example database type:
+
+@sample_db
+
+You should now be able to access the entire example database from p108 of "Principles of distributed database systems". Although it is not necessary to know more details about this example, this book is available in the library of the University
+6. Printing ORACLE output.
+
+To direct SQL output to a file suitable for printing:
+
+spool file_name
+
+To halt redirection:
+
+spool off
+
+7. SQL revision exercises.
+
+    * List the ENO, PNO, RESP and DUR of all assignments of duration longer than 18 weeks.
+    * List the ENO, ENAME, PNO, RESP and DUR for the first query.
+    * List the ENO, ENAME, PNO, PNAME, RESP and DUR for the first query.
+    * List the total salary paid to each employee type (each different TITLE). You should produce a list of each TITLE, the number of employees with that TITLE and the total salary (SAL) paid to all employees with that TITLE. Your output should be in alphabetical order by TITLE.
+    * List those employees (ENO, ENAME) who are working on projects for a longer time that the assignment average.
+    * Increment all salaries by 10%.
+    * Create a table called TEST. This table contains three fields namely FIELD1 (numeric), FIELD2 (string) and FIELD3 (String). The primary key is FIELD1.
+
+8. Further Reading
+
+Additional information about Oracle can be found at https://inside.cs.rmit.edu.au/docs/oracle10g/.
+
+Additional information about SQL*Plus can be found at https://inside.cs.rmit.edu.au/docs/oracle10g/server.102/b14356/toc.htm.
+
+Additional information about SQL can be found at https://inside.cs.rmit.edu.au/docs/oracle10g/server.102/b14200/toc.htm.
+
+ 
+
+© Last Updated by Pablo Rossi, 2008.

@@ -1,0 +1,185 @@
+{\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0\fswiss\fcharset0 Arial;}{\f1\fmodern\fprq6\fcharset134 SimSun;}{\f2\fswiss\fprq2\fcharset0 Arial;}}
+{\*\generator Msftedit 5.41.15.1515;}\viewkind4\uc1\pard\lang1033\f0\fs20 COSC1092/1093 Python assignment\par
+\par
+\ul\b Overview\ulnone\b0\par
+\par
+You have been commissioned by Pacific Megaversity, a new Australian university, to write a system for managing enrolments for tutorial classes. The system is to be written in Python and will ultimately include programs for use by students, tutors and administrative staff. You will be writing the core of it; a Python module which stores, queries and modifies tutorial enrolment data, as well as a few small programs which access it.\par
+You may use any sample data in this assignment specification as test data for your program.\par
+\par
+\par
+\ul\b How data is stored\ulnone\b0\par
+\par
+Since this system is to be used by the university\rquote s Basket-Weaving Department, which traditionally has modest enrolments, it is not expected to need to deal with huge numbers of students; as such, it stores its data in simple files in a directory.\par
+Assume any codes (subject, class, venue) are case-sensitive.\par
+All data for the system is stored in text files in one data directory. The files contain one or more columns of data (columns separated by colons \ldblquote :\rdblquote ) with optional comment lines preceded by hash marks \ldblquote #\rdblquote .\par
+\par
+The directory contains:\par
+\par
+\b - A list of subjects in the system\b0\par
+This is stored in a file named SUBJECTS. Each line in the file contains information about one subject. This information consists of the subject code and the subject\rquote s full name, separated by colons (\lquote :\rquote ). An example SUBJECTS file might look like:\par
+\par
+bw101:Introductory Basketweaving 1\par
+bw110:Introductory Basketweaving 2\par
+bw330:Underwater Basketweaving\par
+\par
+\par
+\b -A list of classes in the system\b0\par
+This is stored in a file named CLASSES. Each line in this file describes one class, and consists of fields separated by colons. The fields are the code for that class, the subject code the class is for, the class time, the venue the class is in, and the name of the tutor taking the class. An example CLASSES file may look like:\par
+\par
+bw101.1:bw101:Mon 9.30:2.5.10:Alice Chiswick\par
+bw101.2:bw101:Wed 14.30:2.6.1:Bob Turnham\par
+bw330A:bw330:Tue 15.30:23.5.32:Carlos Stamford\par
+\par
+\par
+\b -A list of class venues\b0\par
+This is stored in a file named VENUES, and lists the places where classes can be held. Each line gives the venue name and the maximum number of students that can be enrolled in that venue. An example VENUES file may look like:\par
+\par
+2.5.10:18\par
+2.5.11:18\par
+2.6.1:22\par
+23.5.32:50\par
+\par
+\par
+\b -A list of students enrolled in each class\b0\par
+There is one such file for each class; it is named classname.roll, where classname is the name of the class. Each line of the file is the ID number of one student. For example, the first Introductory Basketweaving 1 class in the example above would be kept in a file named bw101.1.roll; if it contained 4 students, its contents might look like:\par
+\par
+1124395\par
+1125622\par
+1109202\par
+1136607\par
+\par
+\par
+In any of the above files, any line starting with a \lquote #\rquote  (hash character) is considered a comment and ignored.\par
+\par
+\par
+\ul\b Your task\ulnone\b0\par
+\par
+In this subject, you will be writing a Python module named enrol. This will contain various utility functions used to make your job easier, as well as an object class which encapsulates the database and through which all interactions with it are performed. You will also write a small program which uses your module. Another client program which uses your module will be made available online for you to test your module against.\par
+The function and class names and specifications in your module must be identical to those in this sheet. Part of the marking process will be conducted by an automated Python program which attempts to use your module. This program will expect the module to conform to this specification; if parts of your module don\rquote t conform, they will be considered not to work.\par
+\par
+\par
+\b Part 1: utility functions\b0\par
+In your enrol module, write the following functions:\par
+\par
+\i readlines(filename)\i0\par
+\par
+    Returns a list of all the lines in a file, except for those starting with a #. filename is a string containing the name of a file. The lines returned must not end in new-line characters.\par
+\par
+\i readtable(filename)\i0\par
+\par
+    Reads a file of colon-delimited lines and returns a list of lists, with each line being represented as a list of strings, split on colons. For example, if the file example contains:\par
+\par
+    foo:1:12\par
+    bar:2:hello\par
+\par
+    then calling readtable(\lquote example\rquote ) will return the Python list [[\lquote foo\rquote ,\lquote 1\rquote ,\lquote 12\rquote ],[\lquote bar\rquote ,\lquote 2\rquote ,\rquote hello\rquote ]].\par
+\par
+\i writelines(filename,lines)\i0\par
+\par
+    This function writes a list of strings safely to the file filename, replacing any content already there. By \ldblquote safely\rdblquote , it should write the lines to a file with a different name in the directory, and if successful, deletes the file named in filename, renames the new file to its name and returns the value 1. If an error occurs during writing (and an exception is raised), it deletes the new file and returns 0.\par
+\par
+\par
+\b Part 2: The Enrol class\b0\par
+\par
+In this part of the assignment, you will be writing a Python class named Enrol in the enrol module, which encapsulates the tutorial enrolment database described above. When the enrol object is created, it will read its data from the directory whose name is given to it. When the program using Enrol calls its methods to retrieve data, it will retrieve the information from its in-memory data structures. When the user calls methods to change data (i.e., to add students to classes), it will change both its data structures and the files on the disk.\par
+The Enrol class has the following methods:\par
+\par
+\i __init__\i0\par
+\par
+    The constructor. Accepts one argument: the name of the directory where the enrolment data is kept. When the object is constructed, it should read its data from the directory.\par
+\par
+\i subjects\i0\par
+\par
+    Returns a list of subject codes handled by the enrolment system. Accepts no arguments.\par
+\par
+\i subjectName\i0\par
+\par
+    Accepts one argument: a subject code. Returns the name of the subject with that code, or None if no subject matches.\par
+\par
+\i classes\i0\par
+\par
+    Returns a list of class IDs for a particular subject. Accepts one argument: the subject code of a subject. Raise KeyError if the subject does not exist.\par
+\par
+\i classInfo\i0\par
+\par
+    Returns information about a class. Accepts one argument: a string containing the class ID. Returns a tuple of the form (subjcode, time, room, tutor, students). The first four elements are strings, and contain the information as described in the CLASSES file specification above. The last item is a list of the student IDs enrolled in the class. Raise KeyError if the class does not exist.\par
+\par
+\i checkStudent\i0\par
+\par
+    Checks which classes a student is enrolled in. Accepts one or two arguments. The first (required) argument is the student ID to check. The second (optional) argument is an optional subject code. If a subject code is specified, returns the class code of the class in which the student is enrolled for that subject; if the student isn\rquote t enrolled in any class in that subject, it returns None. If no subject code is specified, it returns a list of zero or more class codes the student is enrolled in across all possible subjects.\par
+\par
+\i enrol\i0\par
+\par
+    Attempts to enrol a student in a class. Accepts two arguments: a student ID and a class code. It returns 1 if successful, None if not. Before attempting to enrol a student in a class, it attempts to check whether the number of students in the class is less than the capacity of the class\rquote s venue. If not, then there is no space in the class and it fails. If there is space, it proceeds. If the student is enrolled in any other classes in the same subject as the class, she is removed from those classes and placed in the new one. Raise KeyError if the class does not exist.\par
+\par
+You may also want to write internal methods used by the above methods, for example when more than one method needs to perform a certain task. Your internal method names should start with one underscore (_) character, to distinguish them from \ldblquote public\rdblquote  methods.\par
+A possible example of your class in use, showing arguments accepted and results returned, is below:\par
+\par
+>>> import enrol\par
+>>> e = enrol.Enrol("/path/to/data")\par
+>>> e.subjects()\par
+['bw101', 'bw110', 'bw232', 'bw290', 'bw660']\par
+>>> e.subjectName('bw110')\par
+"Introductory Basketweaving 1"\par
+>>> e.classes('bw232')\par
+['bw232.1', 'bw232.2']\par
+>>> e.classInfo('bw232.1')\par
+('bw232', 'Mon 10.30', '66.3.1', 'Jim Derrida', ['1122345','1954231'])\par
+>>> e.checkStudent('1122345','bw232')\par
+"bw232.1"\par
+>>> e.checkStudent('1122345')\par
+['bw232.1', 'bw660.group1', 'bw290_A']\par
+>>> e.enrol('1122345','bw232.2')\par
+1\par
+\par
+\par
+\b Part 3: Statistics client\b0\par
+\par
+In this part, you will be writing a Python command-line script named stats, which uses your module to display statistics about current enrolments.\par
+If run with no arguments, stats will display a list of subjects, and the total number of students and classes for each subject, like so:\par
+\par
+% ./stats\par
+Subjects are:\par
+bw101     Introductory Basketweaving 1   classes: 2, students: 28\par
+bw232     Poststructuralist basketweaving     classes: 2  students: 19\par
+bw290     Non-Euclidean basketweaving    classes: 2  students: 4\par
+\par
+If run with \f1\endash student and a student ID, it should print a list of all the classes the specified student is enrolled in, including subject code and name, location and time:\par
+\par
+% ./stats --student 1123445\par
+bw201 (Baskets throughout History), Mon 11.30, in 2.6.10\par
+bw340 (Quantum Basketweaving), Thu 13.30, in 23.5.4\par
+\par
+stats should look for the name of the data directory in the environment variable ENROLDIR; if it does not exist, it should look in the \ldblquote data\rdblquote  subdirectory of the current directory. If both fail (i.e., if ENROLDIR is invalid, or if ENROLDIR is undefined and the current directory has no data directory in it), it should print an error message and exit.\par
+\par
+\par
+\b\f2 Marking Criteria\b0\f1\par
+\par
+Marks will be awarded for correct operation, as well as the efficiency and elegance of your code. Additional marks may be awarded for appropriate use of advanced Python features. Marks may be deducted for gross inefficiency, poor coding or deviations from the specification.\par
+\par
+Marks will be awarded for neatness of code, appropriate commenting and proper use of Python\rquote s documentation features.\par
+\par
+Your code must not contain any hardwired directory paths; i.e., all filenames are to be treated as relative to the current directory. If your code depends on access to your student home directory, you will fail.\par
+\par
+Your class is to store all data in Python data structures in memory, and should only read the disk files upon initialisation (i.e., in its constructor).\par
+\par
+Your code must adhere to the specification given in this document and code examples. It will be tested against programs expecting this interface, and incompatibilities will result in loss of marks.\par
+\par
+The example data in this sheet are provided purely as an example; your code should not assume that item IDs are in the formats shown in the files (i.e., that student IDs or venues consist of numbers).\par
+Submission Information?\par
+\par
+\ul\b\i\f2 This assignment is worth 25% of your final mark.\par
+\par
+This assignment must be submitted by Sunday 29 May 2011 at 11:59pm.\ulnone\b0\i0\f1\par
+\par
+Late submissions will incur a 10% penalty per day (or part thereof) it is late and a 100% penalty if it is 5 or more days late.\par
+\par
+\ul\b\i\f2 Submission will be via turnin\par
+turnin -c SLP -p Python enrol.py stats\ulnone\b0\i0\f1\par
+\par
+IMPORTANT Requesting extensions. With the exception of dire circumstances, no extension requests will be considered within 3 working days of the submission date. By dire circumstance, we mean your hospitalisation through accidents, or unforseen circumstances like that.\par
+Warning on Plagarism?\par
+\par
+Students are reminded that this assignment is to be attempted individually. Plagiarism of any form will result in zero marks being given for this assessment, and can result in disciplinary action. See the department rules on plagiarism for more details.\f0\par
+}
+ 
